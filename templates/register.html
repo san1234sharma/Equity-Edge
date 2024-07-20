@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function clearMessage() {
+            document.getElementById('msg').innerHTML = '';
+        }
+
+        window.onload = function() {
+            var inputs = document.getElementsByClassName('textbox');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('input', clearMessage);
+            }
+        };
+    </script>
+</head>
+<body>
+    <iframe src="https://gifer.com/embed/J4o" allow=" autoplay;" style=" width:100%;height:100%;position:fixed;z-index:-2;top:0;left:0;"></iframe>
+    <div align="center">
+        <div align="center" class="border" style="margin-top: 50px;">
+            <div class="header">
+                <h1 class="word">Register</h1>
+            </div>
+            <h2 class="word">
+                <form action="{{ url_for('register') }}" method="post">
+                    <div id="msg" class="msg">{{ msg }}</div>
+                    <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox" required/><br><br>
+                    <input id="password" name="pass" type="password" placeholder="Enter Your Password" class="textbox" required/><br><br>
+                    <input id="password1" name="pass1" type="password" placeholder="Confirm Your Password" class="textbox" required/><br><br>
+                    <input id="email" name="email" type="text" placeholder="Enter Your Email ID" class="textbox" required/><br><br>
+                    <input type="submit" class="btn" value="Sign Up"><br>
+                </form>
+            </h2>
+            <p class="bottom">Already have an account? <a class="bottom" href="{{ url_for('login') }}" style="color: #00b894;">Sign In here</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div align="center">
+        <div align="center" class="border">
+            <div class="header">
+                <h1 class="word">Update User Details</h1>
+            </div>
+            <form action="{{ url_for('update_userdetails') }}" method="post">
+                <div class="msg">{{ msg }}</div>
+                <input id="age" name="age" type="number" placeholder="Enter Your Age" class="textbox"/><br><br>
+                <input id="gender" name="gender" type="text" placeholder="Enter Your Gender" class="textbox"/><br><br>
+                <input id="monthly_income" name="monthly_income" type="number" step="0.01" placeholder="Enter Your Monthly Income" class="textbox"/><br><br>
+                <input id="salary" name="salary" type="number" step="0.01" placeholder="Enter Your Salary" class="textbox"/><br><br>
+                <input id="bonuses" name="bonuses" type="number" step="0.01" placeholder="Enter Your Bonuses" class="textbox"/><br><br>
+                <input id="investment_income" name="investment_income" type="number" step="0.01" placeholder="Enter Your Investment Income" class="textbox"/><br><br>
+                <input id="miscellaneous_expenses" name="miscellaneous_expenses" type="number" step="0.01" placeholder="Enter Your Miscellaneous Expenses" class="textbox"/><br><br>
+                <input id="risk_tolerance" name="risk_tolerance" type="text" placeholder="Enter Your Risk Tolerance" class="textbox"/><br><br>
+                <input id="investment_preferences" name="investment_preferences" type="text" placeholder="Enter Your Investment Preferences" class="textbox"/><br><br>
+                <input type="submit" class="btn" value="Update"><br>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

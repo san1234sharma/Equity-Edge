@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks, Bonds, and Cryptocurrencies</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Top Stocks, Bonds, and Cryptocurrencies Below Threshold Price</h1>
+        
+        <h2 class="mt-5">Stocks below ${{ threshold_price }}</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Price ($)</th>
+                    <th>Buy Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for symbol, price, buy_link in stocks %}
+                <tr>
+                    <td>{{ symbol }}</td>
+                    <td>{{ price }}</td>
+                    <td><a href="{{ buy_link }}" target="_blank">Buy</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-5">Bonds below ${{ threshold_price }}</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Price ($)</th>
+                    <th>Buy Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for symbol, price, buy_link in bonds %}
+                <tr>
+                    <td>{{ symbol }}</td>
+                    <td>{{ price }}</td>
+                    <td><a href="{{ buy_link }}" target="_blank">Buy</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-5">Cryptocurrencies below ${{ crypto_threshold_price }}</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Price ($)</th>
+                    <th>Buy Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for symbol, price, buy_link in cryptos %}
+                <tr>
+                    <td>{{ symbol }}</td>
+                    <td>{{ price }}</td>
+                    <td><a href="{{ buy_link }}" target="_blank">Buy</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

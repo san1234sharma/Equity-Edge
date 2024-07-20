@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Financial Portfolios</title>
+</head>
+<body>
+    <h1>User Financial Portfolios</h1>
+    {% if username %}
+        <p>Welcome, {{ username }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a></p>
+    {% endif %}
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Portfolio Recommendation</th>
+            <th>Details</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user['User Id'] }}</td>
+            <td>{{ user['Name'] }}</td>
+            <td>{{ user['Portfolio Recommendation'] }}</td>
+            <td><a href="{{ url_for('user_profile', user_id=user['User Id']) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

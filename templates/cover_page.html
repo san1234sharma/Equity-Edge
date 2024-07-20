@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EquityEdge - Home</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #1e2a38;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00b894;
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 1.7rem;
+            margin-right: 3rem;
+        }
+
+        .navbar .links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .navbar .links a:hover {
+            color: #00b894;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 80px 20px 20px; /* Adjust for fixed navbar */
+            text-align: center;
+        }
+
+        .hero {
+            padding: 100px 20px;
+            background: linear-gradient(to right, #00b894, #1e2a38);
+            color: #fff;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 1000px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero a {
+            display: inline-block;
+            background-color: #fff;
+            color: #00b894;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .hero a:hover {
+            background-color: #00b894;
+            color: #fff;
+        }
+
+        .footer {
+            background-color: #1e2a38;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #00b894;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+    </style>
+    <!-- Include Typed.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+<body>
+    <iframe src="https://gifer.com/embed/J4o" allow=" autoplay;" style=" width:100%;height:100%;position:fixed;z-index:-2;"></iframe>
+    <div class="navbar">
+        <div class="brand">EquityEdge</div>
+        <div class="links">
+            <a href="{{url_for('login')}}">Login</a>
+            <a href="{{url_for('register')}}">Signup&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="hero">
+            <h1 id="typed">Welcome to EquityEdge</h1>
+            <p>Your trusted financial advisor for maximizing profits through strategic investments.</p>
+            <a href="{{url_for('login')}}">Get Started</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 EquityEdge. All rights reserved.</p>
+    </div>
+
+    <!-- Initialize Typed.js -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var options = {
+                strings: ["  ","Welcome to EquityEdge"],
+                typeSpeed: 50,
+                backSpeed: 50,
+                loop: true
+            }
+            var typed = new Typed("#typed", options)
+        })
+    </script>
+</body>
+</html>

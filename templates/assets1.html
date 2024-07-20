@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Recommendations</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top-color: #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+        .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        h3 {
+            color: #007bff;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4 text-center">Financial Recommendations</h1>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <div id="financials-content">
+            <h2>All Financial Data</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Stocks</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stocksBody">
+                            <!-- Data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <h3>Bonds</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Yield</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bondsBody">
+                            <!-- Data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <h3>Cryptocurrencies</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cryptosBody">
+                            <!-- Data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <h3>Fixed Deposits (Predicted for Age 40)</h3>
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Term</th>
+                                <th>Predicted Rate (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fdsBody">
+                            <!-- Data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Best Financial Options</h2>
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-success">
+                            <tr>
+                                <th>Category</th>
+                                <th>Symbol / Description</th>
+                                <th>Price / Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bestFinancialsBody">
+                            <!-- Data will be inserted here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h2>Current Gold Price (in INR)</h2>
+                    <p id="goldPrice">Fetching...</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 chart-container">
+                    <h2>Financial Data Overview</h2>
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = {
+                "best_bond": ["USTB10Y", 1.58],
+                "best_crypto": ["tether", 1.001],
+                "best_stock": ["AMCR", 9.5],
+                "bonds": [
+                    ["USTB10Y", 1.58],
+                    ["USTB30Y", 1.97]
+                ],
+                "cryptos": [
+                    ["tether", 1.001],
+                    ["solana", 139.04],
+                    ["binancecoin", 508.65],
+                    ["ethereum", 3007.32]
+                ],
+                "fd_1_year": 5.654999999999999,
+                "fd_3_years": 6.17,
+                "fd_5_years": 6.655000000000001,
+                "stocks": [
+                    ["AMCR", 9.5],
+                    ["AAL", 11.039999961853027],
+                    ["CCL", 17.209999084472656],
+                    ["AES", 17.709999084472656],
+                    ["T", 18.770000457763672],
+                    ["APA", 28.600000381469727]
+                ],
+                "total_threshold": 12.081
+            };
+
+            const stocksBody = document.getElementById('stocksBody');
+            const bondsBody = document.getElementById('bondsBody');
+            const cryptosBody = document.getElementById('cryptosBody');
+            const fdsBody = document.getElementById('fdsBody');
+            const bestFinancialsBody = document.getElementById('bestFinancialsBody');
+
+            // Populate stocks table
+            data.stocks.forEach(stock => {
+                stocksBody.innerHTML += `
+                    <tr>
+                        <td>${stock[0]}</td>
+                        <td>${stock[1]}</td>
+                    </tr>
+                `;
+            });
+
+            // Populate bonds table
+            data.bonds.forEach(bond => {
+                bondsBody.innerHTML += `
+                    <tr>
+                        <td>${bond[0]}</td>
+                        <td>${bond[1]}</td>
+                    </tr>
+                `;
+            });
+
+            // Populate cryptos table
+            data.cryptos.forEach(crypto => {
+                cryptosBody.innerHTML += `
+                    <tr>
+                        <td>${crypto[0]}</td>
+                        <td>${crypto[1]}</td>
+                    </tr>
+                `;
+            });
+
+            // Populate FDs table with predictions for age 40
+            fdsBody.innerHTML += `
+                <tr>
+                    <td>1 Year</td>
+                    <td>${data.fd_1_year.toFixed(2)}</td>
+                </tr>
+                <tr>
+                    <td>3 Years</td>
+                    <td>${data.fd_3_years.toFixed(2)}</td>
+                </tr>
+                <tr>
+                    <td>5 Years</td>
+                    <td>${data.fd_5_years.toFixed(2)}</td>
+                </tr>
+            `;
+
+            // Populate best financials table
+            bestFinancialsBody.innerHTML += `
+                <tr>
+                    <td>Stock</td>
+                    <td>${data.best_stock ? data.best_stock[0] : '-'}</td>
+                    <td>${data.best_stock ? data.best_stock[1] : '-'}</td>
+                </tr>
+                <tr>
+                    <td>Bond</td>
+                    <td>${data.best_bond ? data.best_bond[0] : '-'}</td>
+                    <td>${data.best_bond ? data.best_bond[1] : '-'}</td>
+                </tr>
+                <tr>
+                    <td>Cryptocurrency</td>
+                    <td>${data.best_crypto ? data.best_crypto[0] : '-'}</td>
+                    <td>${data.best_crypto ? data.best_crypto[1] : '-'}</td>
+                </tr>
+            `;
+
+            // Create chart data
+            const chartLabels = ['Stocks', 'Bonds', 'Cryptos'];
+            const chartData = [
+                data.stocks.length,
+                data.bonds.length,
+                data.cryptos.length
+            ];
+
+            // Create chart
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartLabels,
+                    datasets: [{
+                        label: 'Number of Financial Options',
+                        data: chartData,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

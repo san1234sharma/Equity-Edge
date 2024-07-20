@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimal Investment Allocation</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .pie-chart {
+            max-width: 400px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Optimal Investment Allocation</h1>
+        <p>Here's the suggested allocation for your investments:</p>
+        <div class="pie-chart">
+            <!-- Embedding pie chart as base64 image -->
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Pie Chart">
+        </div>
+    </div>
+    <a href="{{url_for('assets1')}}"><input type="submit" value="View Plan"></a>
+</body>
+
+</html>

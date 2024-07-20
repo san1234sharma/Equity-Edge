@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Retirement_plan</title>
+    <style>
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .navbar {
+            background-color: #1c1e21; /* Dark grey */
+            padding: 0.90rem 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+        
+        .navbar .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .navbar .nav-link:hover {
+            text-decoration: none;
+            color: #00b894; /* Green accent */
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        
+        .navbar a:hover {
+            text-decoration: underline;
+            color: #00b894; /* Green accent */
+        }
+
+        .links {
+            margin: 0 25px;
+            padding: 0 10px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 10px 20px 60px;
+            box-sizing: border-box;
+            width: 100%;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-container {
+            background: transparent;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fffcff;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #fbfafa;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+            background-color: #f9f9f9;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-container input::placeholder {
+            color: #999;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #1c1e21; /* Dark grey */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            animation: pulse 1.5s infinite;
+            margin-left: 40%;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #00b894; /* Green accent */
+        }
+
+        .form-container a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #1c1e21; /* Dark grey */
+            text-decoration: none;
+            font-size: 14px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-container a:hover {
+            text-decoration: underline;
+            color: #00b894; /* Green accent */
+        }
+
+        .footer {
+            background-color: #1c1e21; /* Dark grey */
+            padding: 1rem;
+            color: white;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+            color: #00b894; /* Green accent */
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-grid label,
+        .form-grid input,
+        .form-grid select {
+            animation: fadeIn 1s ease-in;
+        }
+
+        .form-grid input,
+        .form-grid select {
+            width: calc(100% - 26px); /* Adjust for padding and border */
+        }
+
+        /* Toggle switch style */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #00b894;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+    <script>
+        function togglePercentageFields() {
+            var percentageFields = document.getElementById("percentage-fields");
+            var preferredValuesInput = document.getElementById("preferred_values");
+
+            if (preferredValuesInput.checked) {
+                percentageFields.style.display = "block";
+            } else {
+                percentageFields.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <iframe src="https://gifer.com/embed/J4o" allow=" autoplay;" style=" width:100%;height:100%;position:fixed;z-index:-2;"></iframe>
+    <div class="navbar">
+        <div class="brand">
+            <a href="/" class="nav-link">EquityEdge</a>
+        </div>
+        <div class="links">
+            <a href="{{url_for('index')}}" class="nav-link">Home &nbsp;</a>
+            <a href="{{url_for('add_userdetails')}}"  class="nav-link">Beginners Plan &nbsp;</a>
+            <!-- <a href="{{url_for('retirement_plan')}}" class="nav-link">Retirement Plan &nbsp;</> -->
+            <a href="{{url_for('corpus_invest')}}">Corpus Invest&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-container">
+            <h1>Plan for Retirement</h1>
+            <form action="/retirement_plan" method="post">
+                <div class="form-grid">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter Name" required oninput="this.value = this.value.replace(/[^A-Za-z ]+/g, '')">
+
+                        <label for="current_age">Current Age:</label>
+                        <input type="number" id="current_age" name="current_age" placeholder="Enter Current Age" required oninput="this.value = Math.abs(this.value)">
+
+                        <label for="retirement_age">Retirement Age:</label>
+                        <input type="number" id="retirement_age" name="retirement_age" placeholder="Enter Age of Retirement" required oninput="this.value = Math.abs(this.value)">
+
+                        <label for="income">Budget:</label>
+                        <input type="text" id="income" name="income" placeholder="Enter Income" required oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+
+                        <label for="expected_amount">Expected Return Amount:</label>
+                        <input type="text" id="expected_amount" name="expected_amount" placeholder="Enter Expected Amount" required oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+                    </div>
+                    <div>
+                        <label>Toggle to Enter Preferred Investments:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="preferred_values" name="preferred_values" value="yes" onclick="togglePercentageFields()">
+                            <span class="slider"></span>
+                        </label>
+                        
+                        <div id="percentage-fields" style="display: none;">
+                            <label for="stocks">Stocks (%):</label>
+                            <input type="number" id="stocks" name="stocks" placeholder="Enter Percentage for Stocks" oninput="this.value = Math.abs(this.value)">
+
+                            <label for="bonds">Bonds (%):</label>
+                            <input type="number" id="bonds" name="bonds" placeholder="Enter Percentage for Bonds" oninput="this.value = Math.abs(this.value)">
+
+                            <label for="gold">Gold (%):</label>
+                            <input type="number" id="gold" name="gold" placeholder="Enter Percentage for Gold" oninput="this.value = Math.abs(this.value)">
+
+                            <label for="cryptocurrency">Cryptocurrency (%):</label>
+                            <input type="number" id="cryptocurrency" name="cryptocurrency" placeholder="Enter Percentage for Cryptocurrency" oninput="this.value = Math.abs(this.value)">
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Obtain Plan">
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2024 EquityEdge. All rights reserved.
+    </div>
+</body>
+</html>

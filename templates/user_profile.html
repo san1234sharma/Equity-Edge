@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>{{ user['Name'] }}'s Financial Profile</h1>
+    <p><strong>Age:</strong> {{ user['Age'] }}</p>
+    <p><strong>Gender:</strong> {{ user['Gender'] }}</p>
+    <p><strong>Risk Tolerance:</strong> {{ user['Risk Tolerance'] }}</p>
+    <p><strong>Investment Preferences:</strong> {{ user['Investment preferences'] }}</p>
+    <p><strong>Portfolio Recommendation:</strong> {{ user['Portfolio Recommendation'] }}</p>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Pie Chart">
+    <p><a href="{{ url_for('logout') }}">Logout </a></p>
+    <p><a href="{{ url_for('home') }}">Return to Home </a></p>
+</body>
+</html>
